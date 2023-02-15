@@ -1,3 +1,5 @@
+import './styles.css';
+
 let compScore: number = 0;
 let playerScore: number = 0;
 
@@ -18,6 +20,9 @@ const elements: Elements = {
   playerScoreSpan: document.querySelector('.player-score'),
   compScoreSpan: document.querySelector('.comp-score'),
 };
+
+elements.playerScoreSpan.innerText = `Player Score: ${playerScore}`;
+elements.compScoreSpan.innerText = `Computer Score: ${compScore}`;
 
 const computerPlay = (): string => {
   const arrOfChoices: string[] = ['rock', 'paper', 'scissors'];
@@ -51,6 +56,7 @@ const playRound = (
   const result = outcomes[playerSelection][computerSelection];
 
   if (result) {
+    elements.outcomeDiv.innerHTML = '';
     elements.outcomeDiv.innerHTML += `<p>${result}</p>`;
 
     if (result.includes('win')) {
@@ -71,16 +77,18 @@ const checkForWinner = (
   compScore: number
 ): [number, number] => {
   if (playerScore === 5) {
-    const h2 = document.createElement('h2');
-    h2.innerText = 'You won!';
-    elements.outcomeDiv.append(h2);
+    const h1 = document.createElement('h1');
+    h1.innerText = 'You won!';
+    h1.classList.add('win-outcome');
+    elements.outcomeDiv.append(h1);
     return [0, 0];
   }
 
   if (compScore === 5) {
-    const h2 = document.createElement('h2');
-    h2.innerText = 'You lost!';
-    elements.outcomeDiv.append(h2);
+    const h1 = document.createElement('h1');
+    h1.innerText = 'You lost!';
+    h1.classList.add('loss-outcome');
+    elements.outcomeDiv.append(h1);
     return [0, 0];
   }
 
